@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Set the initial count to 0
+count=0
+
+# Loop through all directories in the current directory and count them
+for dir in */; do
+    # Check that the directory is not the current or parent directory
+    if [ "$dir" != "./" ] && [ "$dir" != "../" ]; then
+        count=$((count+1))  # Increment the count for each directory
+        count=$((count+$(find "$dir" -type d | wc -l)-1)) # Recursively count sub-directories
+    fi
+done
+
+# Print the total count
+echo "The total number of directories and sub-directories in the current directory is: $count"
+
